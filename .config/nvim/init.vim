@@ -1,6 +1,6 @@
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -18,8 +18,8 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
-" realtime feedback
-Plug 'w0rp/ale'
+" most essential plugin
+Plug 'jlanzarotta/bufexplorer'
 
 " blazing fast fuzzy search
 Plug 'junegunn/fzf.vim'
@@ -33,32 +33,47 @@ map <C-s> :Rg<CR>
 Plug 'mileszs/ack.vim'
 let g:ackprg = 'rg --vimgrep --no-heading'
 
+" realtime feedback
+Plug 'w0rp/ale'
+
+let g:ale_fixers = {
+      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \   'elixir': ['mix_format'],
+      \}
+let g:ale_fix_on_save = 1
+
+
+" One syntax plugin to rule them all
+Plug 'sheerun/vim-polyglot'
+
+" test all the things
+Plug 'janko-m/vim-test'
+noremap <silent> <leader>.  :TestNearest<CR>
+noremap <silent> <leader>tf :TestFile<CR>
+noremap <silent> <leader>ts :TestSuite<CR>
+noremap <silent> <leader>tl :TestLast<CR>
+if has("nvim")
+    let test#strategy = "neovim"
+endif
+
 " git
-Plug 'tpope/vim-git'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'jbranchaud/vim-bdubs'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'jgdavey/tslime.vim'
 Plug 'jgdavey/vim-turbux'
-Plug 'kchmck/vim-coffee-script'
-Plug 'leshill/vim-json'
 
-Plug 'rondale-sc/vim-spacejam'
-Plug 'slim-template/vim-slim'
+" all the other tpope things
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-projectionist'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-rails'
@@ -71,27 +86,20 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-ruby/vim-ruby'
-Plug 'jlanzarotta/bufexplorer'
+
+"ruby
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'exu/pgsql.vim'
-Plug 'sbdchd/neoformat'
 Plug 'hashrocket/vim-hashrocket'
 
-" javascript
-Plug 'pangloss/vim-javascript'
-Plug 'leafgarland/typescript-vim'
-
 " Elixir
-Plug 'elixir-editors/vim-elixir'
 Plug 'avdgaag/vim-phoenix'
 Plug 'slashmili/alchemist.vim'
 
+" ctags
 Plug 'ludovicchabant/vim-gutentags'
 
 " Haskell
-Plug 'neovimhaskell/haskell-vim'
 " plug 'alx741/vim-hindent'
 Plug 'jaspervdj/stylish-haskell'
 Plug 'parsonsmatt/intero-neovim'
@@ -100,8 +108,11 @@ call plug#end()
 
 set number
 
+" must be set outsede of vim-plug
 colorscheme nord
-" set background=dark
 
 " map <Esc> to exit termial-mode
 :tnoremap <Esc> <C-\><C-n>
+
+" delete all buffers then reload the last (current) buffer
+:command! BO :%bd | e#
