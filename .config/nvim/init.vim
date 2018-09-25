@@ -61,7 +61,6 @@ Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 
 " all the other tpope things
@@ -83,17 +82,20 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 
+" ctags
+Plug 'ludovicchabant/vim-gutentags'
+
+" autocompletion
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+
 "ruby
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
-Plug 'hashrocket/vim-hashrocket'
 
 " Elixir
 Plug 'avdgaag/vim-phoenix'
 Plug 'slashmili/alchemist.vim'
-
-" ctags
-Plug 'ludovicchabant/vim-gutentags'
 
 " Haskell
 " plug 'alx741/vim-hindent'
