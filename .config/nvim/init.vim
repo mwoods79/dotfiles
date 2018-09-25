@@ -25,7 +25,7 @@ Plug 'junegunn/fzf.vim'
 Plug '/usr/local/opt/fzf'
 
 map <C-p> :Files<CR>
-map <C-t> :Buffers<CR>
+map <C-b> :Buffers<CR>
 map <C-s> :Rg<CR>
 
 " quickly find in files
