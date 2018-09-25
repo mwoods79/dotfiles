@@ -7,7 +7,6 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " colorscheme
-Plug 'altercation/vim-colors-solarized'
 Plug 'arcticicestudio/nord-vim'
 
 " status bar
