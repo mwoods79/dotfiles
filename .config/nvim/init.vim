@@ -110,7 +110,7 @@ set number
 colorscheme nord
 
 " map <Esc> to exit termial-mode
-:tnoremap <Esc> <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 
 " delete all buffers then reload the last (current) buffer
-:command! BO :%bd | e#
+command! BO :%bd | e#
