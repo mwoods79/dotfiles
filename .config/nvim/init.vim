@@ -41,19 +41,18 @@ let g:ale_fixers = {
       \}
 let g:ale_fix_on_save = 1
 
-
 " One syntax plugin to rule them all
 Plug 'sheerun/vim-polyglot'
 
 " test all the things
+Plug 'jgdavey/tslime.vim'
 Plug 'janko-m/vim-test'
-noremap <silent> <leader>.  :TestNearest<CR>
-noremap <silent> <leader>tf :TestFile<CR>
-noremap <silent> <leader>ts :TestSuite<CR>
-noremap <silent> <leader>tl :TestLast<CR>
-if has("nvim")
-    let test#strategy = "neovim"
-endif
+let test#strategy = "tslime"
+nmap <silent> <leader>t :TestFile<CR>
+nmap <silent> <leader>T :TestNearest<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -64,8 +63,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-Plug 'jgdavey/tslime.vim'
-Plug 'jgdavey/vim-turbux'
 
 " all the other tpope things
 Plug 'tpope/vim-abolish'
