@@ -35,6 +35,7 @@ let g:ackprg = 'rg --vimgrep --no-heading'
 " realtime feedback
 Plug 'w0rp/ale'
 
+let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'elixir': ['mix_format'],
