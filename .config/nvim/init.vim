@@ -39,6 +39,7 @@ let g:ale_linters = {'javascript': ['eslint']}
 let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'elixir': ['mix_format'],
+      \   'go': ['gofmt'],
       \}
 let g:ale_fix_on_save = 1
 
