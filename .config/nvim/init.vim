@@ -105,13 +105,32 @@ Plug 'parsonsmatt/intero-neovim'
 
 call plug#end()
 
+" show line numbers
 set number
 
 " must be set outsede of vim-plug
 colorscheme nord
+
+" persistend undo history
+set undofile
+set undodir^=~/.vim/tmp//,~/Library/Vim/undo
+
+" copy to end of line
+nnoremap Y y$
+" copy to system clipboard
+vnoremap gy "+y
+" copy whole file to system clipboard
+nnoremap gY gg"+yG
 
 " map <Esc> to exit termial-mode
 tnoremap <Esc> <C-\><C-n>
 
 " delete all buffers then reload the last (current) buffer
 command! BO :%bd | e#
+
+augroup Misc
+  autocmd!
+  " Only create a swap file when the file is modified
+  autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
+        \ if !$VIMSWAP && isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+augroup END
