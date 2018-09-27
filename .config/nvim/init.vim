@@ -89,7 +89,6 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " autocompletion
 Plug 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 "ruby
 Plug 'kana/vim-textobj-user'
