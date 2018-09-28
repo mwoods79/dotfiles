@@ -133,4 +133,7 @@ augroup Misc
   " Only create a swap file when the file is modified
   autocmd CursorHold,BufWritePost,BufReadPost,BufLeave *
         \ if !$VIMSWAP && isdirectory(expand("<amatch>:h")) | let &swapfile = &modified | endif
+
+  " Use q to quit help buffers
+  autocmd FileType help nnoremap <buffer> q :q<cr>
 augroup END
