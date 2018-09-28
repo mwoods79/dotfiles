@@ -125,6 +125,10 @@ nnoremap gY gg"+yG
 " map <Esc> to exit termial-mode
 tnoremap <Esc> <C-\><C-n>
 
+" quickly edit this file and source it
+nmap <silent> <leader>ev :e ~/.vimrc<CR>
+nmap <silent> <leader>sv :so ~/.vimrc<CR>
+
 " delete all buffers then reload the last (current) buffer
 command! BO :%bd | e#
 
