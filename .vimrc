@@ -62,9 +62,6 @@ Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
 
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'godlygeek/tabular'
-
 " all the other tpope things
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-bundler'
@@ -89,6 +86,12 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " autocompletion
 Plug 'ervandew/supertab'
+
+" convert code blocks to one-liners and back again
+Plug 'AndrewRadev/splitjoin.vim'
+
+" align things pretty
+Plug 'junegunn/vim-easy-align'
 
 "ruby
 Plug 'kana/vim-textobj-user'
