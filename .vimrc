@@ -7,12 +7,12 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
 " colorscheme
-Plug 'arcticicestudio/nord-vim'
+Plug 'altercation/vim-colors-solarized'
 
 " status bar
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'solarized',
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
@@ -112,7 +112,8 @@ call plug#end()
 set number
 
 " must be set outsede of vim-plug
-colorscheme nord
+set background=dark
+colorscheme solarized
 
 " persistend undo history
 set undofile
