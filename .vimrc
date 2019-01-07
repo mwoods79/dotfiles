@@ -136,6 +136,7 @@ nmap <silent> <leader>sv :so ~/.vimrc<CR>
 
 " delete all buffers then reload the last (current) buffer
 command! BO :%bd | e#
+command! JQ :%!jq '.'
 
 augroup Misc
   autocmd!
