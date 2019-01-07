@@ -40,6 +40,7 @@ let g:ale_fixers = {
       \   '*': ['remove_trailing_lines', 'trim_whitespace'],
       \   'elixir': ['mix_format'],
       \   'go': ['gofmt'],
+      \   'ruby': ['rubocop'],
       \}
 let g:ale_fix_on_save = 1
 
