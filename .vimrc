@@ -35,12 +35,17 @@ let g:ackprg = 'rg --vimgrep --no-heading'
 " realtime feedback
 Plug 'w0rp/ale'
 
-let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {
+      \  'javascript': ['eslint'],
+      \  'typescript': ['eslint', 'tsserver'],
+      \}
 let g:ale_fixers = {
-      \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \   'elixir': ['mix_format'],
-      \   'go': ['gofmt'],
-      \   'ruby': ['rubocop'],
+      \  '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \  'elixir': ['mix_format'],
+      \  'go': ['gofmt'],
+      \  'ruby': ['rubocop'],
+      \  'javascript': ['eslint'],
+      \  'typescript': ['eslint'],
       \}
 let g:ale_fix_on_save = 1
 
