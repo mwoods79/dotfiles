@@ -7,7 +7,7 @@ let g:projectionist_heuristics = {
 			\    },
 			\    "test/*_test.exs": {
 			\      "command": "test",
-			\      "template": [ "defmodule {capitalize|camelcase|dot}Test do", "  use ExUnit.Case", "end" ],
+			\      "template": [ "defmodule {capitalize|camelcase|dot}Test do", "  use ExUnit.Case, async: true", "end" ],
 			\      "alternate": "lib/{}.ex"
 			\    },
 			\    "config/config.exs": {
