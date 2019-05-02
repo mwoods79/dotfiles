@@ -6,6 +6,9 @@ endif
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+" the defaults vim should have been born with
+Plug 'tpope/vim-sensible'
+
 " colorscheme
 Plug 'altercation/vim-colors-solarized'
 
@@ -14,11 +17,15 @@ Plug 'itchyny/lightline.vim'
 let g:lightline = {
       \ 'colorscheme': 'solarized',
       \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
+      \ 'subseparator': { 'left': '', 'right': '' },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
       \ }
-
-" most essential plugin
-Plug 'jlanzarotta/bufexplorer'
 
 " blazing fast fuzzy search
 Plug 'junegunn/fzf.vim'
@@ -27,27 +34,6 @@ Plug '/usr/local/opt/fzf'
 map <C-p> :Files<CR>
 map <C-b> :Buffers<CR>
 map <C-s> :Rg<CR>
-
-" quickly find in files
-Plug 'mileszs/ack.vim'
-let g:ackprg = 'rg --vimgrep --no-heading'
-
-" realtime feedback
-Plug 'w0rp/ale'
-
-let g:ale_linters = {
-      \  'javascript': ['eslint'],
-      \  'typescript': ['eslint', 'tsserver'],
-      \}
-let g:ale_fixers = {
-      \  '*': ['remove_trailing_lines', 'trim_whitespace'],
-      \  'elixir': ['mix_format'],
-      \  'go': ['gofmt'],
-      \  'ruby': ['rubocop'],
-      \  'javascript': ['eslint'],
-      \  'typescript': ['eslint'],
-      \}
-let g:ale_fix_on_save = 1
 
 " One syntax plugin to rule them all
 Plug 'sheerun/vim-polyglot'
@@ -61,6 +47,85 @@ nmap <silent> <leader>T :TestNearest<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" full featured LSP client for vim
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
+" make vim's completion like vs code
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-y>" :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+
+" Fix autofix problem of current line
+nmap <leader>qf <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p :<C-u>CocListResume<CR>
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -80,7 +145,6 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-rake'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-rsi'
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-surround'
@@ -90,47 +154,11 @@ Plug 'tpope/vim-vinegar'
 " ctags
 Plug 'ludovicchabant/vim-gutentags'
 
-" autocompletion
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<TAB>"
-let g:coc_snippet_next = '<TAB>'
-let g:coc_snippet_prev = '<S-TAB>'
-
-" function! s:check_back_space() abort
-"   let col = col('.') - 1
-"   return !col || getline('.')[col - 1]  =~ '\s'
-" endfunction
-
-" inoremap <silent><expr> <TAB>
-"       \ pumvisible() ? "\<C-n>" :
-"       \ <SID>check_back_space() ? "\<TAB>" :
-"       \ coc#refresh()
-
-" inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<CR>"
-" autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-
 " convert code blocks to one-liners and back again
 Plug 'AndrewRadev/splitjoin.vim'
 
 " align things pretty
 Plug 'junegunn/vim-easy-align'
-
-"ruby
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
-
-" Elixir
-Plug 'avdgaag/vim-phoenix'
-Plug 'slashmili/alchemist.vim'
-
-" Haskell
-" plug 'alx741/vim-hindent'
-Plug 'jaspervdj/stylish-haskell'
-Plug 'parsonsmatt/intero-neovim'
 
 call plug#end()
 
