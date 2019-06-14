@@ -180,8 +180,13 @@ vnoremap gy "+y
 " copy whole file to system clipboard
 nnoremap gY gg"+yG
 
-" map <Esc> to exit termial-mode
-tnoremap <Esc> <C-\><C-n>
+if has("nvim")
+  " map <Esc> to exit termial-mode
+  au TermOpen * tnoremap <Esc> <c-\><c-n>
+  " allow <Esc> to still close fzf
+  au FileType fzf tunmap <Esc>
+endif
+
 
 " quickly edit this file and source it
 nmap <silent> <leader>ev :e ~/.vimrc<CR>
