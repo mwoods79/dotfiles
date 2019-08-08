@@ -38,6 +38,11 @@ map <C-s> :Rg<CR>
 " One syntax plugin to rule them all
 Plug 'sheerun/vim-polyglot'
 
+" Other languages
+Plug 'jparise/vim-graphql'
+Plug 'joukevandermaas/vim-ember-hbs'
+
+
 " test all the things
 Plug 'jgdavey/tslime.vim'
 Plug 'janko-m/vim-test'
