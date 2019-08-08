@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir"],
+  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir", "javascript", "typescript"],
   "suggest.noselect": false,
   "languageserver": {
     "elixirLS": {
