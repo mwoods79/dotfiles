@@ -3,7 +3,7 @@
   "suggest.noselect": false,
   "languageserver": {
     "elixirLS": {
-      "command": "/Users/mwoods/code/elixir-ls/rel/language_server.sh",
+      "command": "~/code/elixir-ls/rel/language_server.sh",
       "filetypes": ["elixir", "eelixir"]
     },
     "haskell": {
