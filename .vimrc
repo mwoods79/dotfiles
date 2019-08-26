@@ -136,7 +136,6 @@ nnoremap <silent> <space>p :<C-u>CocListResume<CR>
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
 
 " all the other tpope things
 Plug 'tpope/vim-abolish'
@@ -172,6 +171,7 @@ let g:coc_global_extensions = [
   \ 'coc-ember',
   \ 'coc-elixir',
   \ 'coc-eslint',
+  \ 'coc-git',
   \ 'coc-highlight',
   \ 'coc-html',
   \ 'coc-json',
