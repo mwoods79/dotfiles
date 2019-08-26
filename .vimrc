@@ -170,6 +170,7 @@ call plug#end()
 let g:coc_global_extensions = [
   \ 'coc-css',
   \ 'coc-ember',
+  \ 'coc-elixir',
   \ 'coc-eslint',
   \ 'coc-highlight',
   \ 'coc-html',
@@ -206,7 +207,6 @@ if has("nvim")
   " allow <Esc> to still close fzf
   au FileType fzf tunmap <Esc>
 endif
-
 
 " quickly edit this file and source it
 nmap <silent> <leader>ev :e ~/.vimrc<CR>

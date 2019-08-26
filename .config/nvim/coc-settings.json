@@ -1,11 +1,8 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir", "javascript", "typescript"],
   "suggest.noselect": false,
+  "elixir.pathToElixirLS": "~/code/elixir-ls/rel/language_server.sh",
   "languageserver": {
-    "elixirLS": {
-      "command": "~/code/elixir-ls/rel/language_server.sh",
-      "filetypes": ["elixir", "eelixir"]
-    },
     "haskell": {
       "command": "hie-wrapper",
       "rootPatterns": [".stack.yaml", "cabal.config", "package.yaml"],
