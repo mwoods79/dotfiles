@@ -1,6 +1,8 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir", "javascript", "typescript"],
+  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir"],
   "suggest.noselect": false,
+  "eslint.autoFixOnSave": true,
+  "tslint.autoFixOnSave": true,
   "elixir.pathToElixirLS": "~/code/elixir-ls/rel/language_server.sh",
   "languageserver": {
     "haskell": {
