@@ -168,8 +168,8 @@ call plug#end()
 
 let g:coc_global_extensions = [
   \ 'coc-css',
-  \ 'coc-ember',
   \ 'coc-elixir',
+  \ 'coc-ember',
   \ 'coc-eslint',
   \ 'coc-git',
   \ 'coc-highlight',
