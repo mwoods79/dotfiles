@@ -29,3 +29,5 @@ alias gra='git rebase --abort'
 alias gco='git checkout'
 
 set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+
+set -g FZF_CTRL_T_COMMAND "rg --files --hidden"
