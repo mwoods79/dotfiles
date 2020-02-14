@@ -10,7 +10,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'tpope/vim-sensible'
 
 " colorscheme
-Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 
 " status bar
 Plug 'itchyny/lightline.vim'
@@ -187,7 +187,7 @@ set number
 
 " must be set outsede of vim-plug
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 
 " persistend undo history
 set undofile
