@@ -1,8 +1,9 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir"],
+  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir", "ruby"],
   "suggest.noselect": false,
   "eslint.autoFixOnSave": true,
   "tslint.autoFixOnSave": true,
+  "solargraph.formatting": true,
   "languageserver": {
     "haskell": {
       "command": "hie-wrapper",
