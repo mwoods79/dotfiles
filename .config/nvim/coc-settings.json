@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir", "ruby"],
+  "coc.preferences.formatOnSaveFiletypes": ["elixir", "eelixir", "ruby", "go"],
   "suggest.noselect": false,
   "eslint.autoFixOnSave": true,
   "tslint.autoFixOnSave": true,

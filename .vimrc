@@ -172,6 +172,7 @@ let g:coc_global_extensions = [
   \ 'coc-ember',
   \ 'coc-eslint',
   \ 'coc-git',
+  \ 'coc-go',
   \ 'coc-highlight',
   \ 'coc-html',
   \ 'coc-json',
