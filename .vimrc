@@ -224,3 +224,11 @@ augroup Misc
   " Use q to quit help buffers
   autocmd FileType help nnoremap <buffer> q :q<cr>
 augroup END
+
+" make netrw work like nerdtree
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+nmap <silent> <C-e> :Lexplore<CR>
