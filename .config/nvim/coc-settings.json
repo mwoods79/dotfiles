@@ -4,7 +4,9 @@
   "eslint.autoFixOnSave": true,
   "tslint.autoFixOnSave": true,
   "solargraph.formatting": true,
-  "elixir.pathToElixirLS": "~/code/elixir-ls/rel/language_server.sh",
+  "codeLens.enable": true,
+  "elixir.pathToElixirLS": "~/.elixir_ls/language_server.sh",
+  "snippets.ultisnips.enable": false,
   "languageserver": {
     "haskell": {
       "command": "hie-wrapper",
