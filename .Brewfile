@@ -1,1 +1,22 @@
 brew "nvim"
+brew "starship"
+brew "git"
+brew "coreutils"
+brew "curl"
+brew "git"
+brew "asdf"
+brew "gpg"
+brew "fzf"
+brew "ctags"
+brew "tmux"
+brew "direnv"
+brew "ripgrep"
+
+brew "go"
+brew "golang-migrate"
+
+cask "iterm2"
+tap "homebrew/cask-fonts"
+cask "font-fira-code"
+
+cask "karabiner-elements"
