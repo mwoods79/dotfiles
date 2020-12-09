@@ -22,5 +22,15 @@ let g:projectionist_heuristics = {
 			\    "README.md": {
 			\      "command": "readme"
 			\    }
+			\  },
+			\  "*.go": {
+			\    "*.go": {
+			\      "alternate": "{}_test.go",
+			\      "type": "source"
+			\    },
+			\    "*_test.go": {
+			\      "alternate": "{}.go",
+			\      "type": "test"
+			\    },
 			\  }
 			\}
