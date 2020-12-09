@@ -11,6 +11,7 @@ brew "ctags"
 brew "tmux"
 brew "direnv"
 brew "ripgrep"
+brew "jq"
 
 brew "go"
 brew "golang-migrate"
