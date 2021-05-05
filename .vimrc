@@ -41,6 +41,7 @@ Plug 'sheerun/vim-polyglot'
 " Other languages
 Plug 'jparise/vim-graphql'
 Plug 'joukevandermaas/vim-ember-hbs'
+Plug 'hellerve/carp-vim'
 
 
 " test all the things
