@@ -1,5 +1,25 @@
+###
+# PATH
+###
+
+# Homebrew path for M1 macs
+if test -d /opt/homebrew/bin
+	set homebrew_path /opt/homebrew
+else
+	set homebrew_path /user/local
+end
+
+fish_add_path $homebrew_path/bin
+fish_add_path $homebrew_path/sbin
+
 # Stack executables
-set PATH ~/.local/bin $PATH
+if test -d /.local/bin
+	fish_add_path ~/.local/bin
+end
+
+###
+# ALIAS
+###
 
 # use NeoVim by default
 alias v="nvim"
@@ -28,6 +48,16 @@ alias grc='git rebase --continue'
 alias gra='git rebase --abort'
 alias gco='git checkout'
 
-set -g fish_user_paths "/usr/local/sbin" $fish_user_paths
+###
+# SETTINGS
+###
 
 set -g FZF_CTRL_T_COMMAND "rg --files --hidden"
+
+###
+# INITIALIZE
+###
+
+starship init fish | source
+
+source $homebrew_path/opt/asdf/libexec/asdf.fish

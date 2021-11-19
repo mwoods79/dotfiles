@@ -29,7 +29,13 @@ let g:lightline = {
 
 " blazing fast fuzzy search
 Plug 'junegunn/fzf.vim'
-Plug '/usr/local/opt/fzf'
+
+" check if m1 mac
+if isdirectory("/opt/homebrew/opt/fzf")
+  Plug '/opt/homebrew/opt/fzf'
+else
+  Plug '/usr/local/opt/fzf'
+endif
 
 map <C-p> :Files<CR>
 map <C-b> :Buffers<CR>
