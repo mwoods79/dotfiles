@@ -4,13 +4,9 @@
 
 # Homebrew path for M1 macs
 if test -d /opt/homebrew/bin
-	set homebrew_path /opt/homebrew
-else
-	set homebrew_path /user/local
+	fish_add_path $homebrew_path/bin
+	fish_add_path $homebrew_path/sbin
 end
-
-fish_add_path $homebrew_path/bin
-fish_add_path $homebrew_path/sbin
 
 # Stack executables
 if test -d /.local/bin
@@ -60,4 +56,4 @@ set -g FZF_CTRL_T_COMMAND "rg --files --hidden"
 
 starship init fish | source
 
-source $homebrew_path/opt/asdf/libexec/asdf.fish
+source (brew --prefix)/opt/asdf/libexec/asdf.fish
