@@ -4,6 +4,7 @@ alias vim=nvim
 
 export EDITOR='nvim'
 export PSQL_EDITOR='nvim -c"setf sql"'
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 # import local zsh customizations, if present
 zrcl="$HOME/.zshrc.local"
@@ -19,16 +20,11 @@ fi
 source ~/.zplug/init.zsh
 
 # plugins
-zplug "plugins/asdf", from:oh-my-zsh
 zplug "plugins/bundler", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 
 zplug "zsh-users/zsh-syntax-highlighting", from:github, defer:3
-
-# Theme!
-zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure", use:pure.zsh, as:theme
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -38,3 +34,9 @@ if ! zplug check --verbose; then
 fi
 
 zplug load --verbose
+
+# load starship prompt
+eval "$(starship init zsh)"
+
+# load asdf completions
+source /usr/local/opt/asdf/libexec/asdf.sh
