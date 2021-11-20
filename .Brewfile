@@ -13,9 +13,6 @@ brew "direnv"
 brew "ripgrep"
 brew "jq"
 
-brew "go"
-brew "golang-migrate"
-
 cask "iterm2"
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
