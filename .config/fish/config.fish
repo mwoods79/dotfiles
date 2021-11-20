@@ -4,8 +4,8 @@
 
 # Homebrew path for M1 macs
 if test -d /opt/homebrew/bin
-	fish_add_path $homebrew_path/bin
-	fish_add_path $homebrew_path/sbin
+	fish_add_path /opt/homebrew/bin
+	fish_add_path /opt/homebrew/sbin
 end
 
 # Stack executables
