@@ -16,5 +16,3 @@ brew "jq"
 cask "iterm2"
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
-
-cask "karabiner-elements"
