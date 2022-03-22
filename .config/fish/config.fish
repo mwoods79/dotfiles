@@ -8,8 +8,13 @@ if test -d /opt/homebrew/bin
 	fish_add_path /opt/homebrew/sbin
 end
 
+# dotfile executables
+if test -d ~/.bin
+	fish_add_path ~/.bin
+end
+
 # Stack executables
-if test -d /.local/bin
+if test -d ~/.local/bin
 	fish_add_path ~/.local/bin
 end
 
