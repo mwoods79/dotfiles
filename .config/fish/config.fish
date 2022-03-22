@@ -53,7 +53,9 @@ alias gco='git checkout'
 # SETTINGS
 ###
 
-set -g FZF_CTRL_T_COMMAND "rg --files --hidden"
+set -gx EDITOR 'nvim'
+set -gx PSQL_EDITOR 'nvim -c"setf sql"'
+set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git"'
 
 ###
 # INITIALIZE
