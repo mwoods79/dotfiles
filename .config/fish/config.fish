@@ -63,3 +63,6 @@ set -gx FZF_DEFAULT_COMMAND 'rg --files --hidden --follow --glob "!.git"'
 starship init fish | source
 
 source (brew --prefix)/opt/asdf/libexec/asdf.fish
+
+# opam configuration
+source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
