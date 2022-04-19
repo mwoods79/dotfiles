@@ -23,9 +23,8 @@ end
 ###
 
 # use NeoVim by default
-alias v="nvim"
-alias vi="nvim"
 alias vim="nvim"
+alias e="nvim"
 
 # set some alias for git
 alias gap='git add -p'
