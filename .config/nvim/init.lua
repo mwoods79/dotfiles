@@ -8,6 +8,11 @@ end
 local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
 vim.api.nvim_create_autocmd('BufWritePost', { command = 'source <afile> | PackerCompile', group = packer_group, pattern = 'init.lua' })
 
+local ok, impatient = pcall(require, "impatient")
+if ok then
+  impatient.enable_profile()
+end
+
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim' -- Package manager
   use 'tpope/vim-fugitive' -- Git commands in nvim
@@ -36,6 +41,9 @@ require('packer').startup(function(use)
 
   -- Elixir specific
   use({ "mhanberg/elixir.nvim", requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" } })
+
+  -- Cache me (lua) outside how bout dat
+  use 'lewis6991/impatient.nvim'
 end)
 
 --Set highlight on search
