@@ -12,6 +12,7 @@ brew "tmux"
 brew "direnv"
 brew "ripgrep"
 brew "jq"
+brew "reattach-to-user-namespace"
 
 cask "iterm2"
 tap "homebrew/cask-fonts"
