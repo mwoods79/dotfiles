@@ -74,6 +74,7 @@ vim.o.termguicolors = true
 -- vim.cmd [[colorscheme onedark]]
 local onedarkpro = require('onedarkpro')
 onedarkpro.setup({
+  theme = 'onedark',
   options = {
     transparency = true
   }
@@ -86,10 +87,8 @@ vim.o.completeopt = 'menuone,noselect'
 --Set statusbar
 require('lualine').setup {
   options = {
-    icons_enabled = false,
+    -- icons_enabled = false,
     theme = 'onedark',
-    component_separators = '|',
-    section_separators = '',
   },
 }
 
@@ -303,9 +302,9 @@ elixir.setup({
   capabilities = capabilities,
   on_attach = function(client, bufnr)
     on_attach(client, bufnr)
-    local map_opts = { buffer = true, noremap = true}
+    local map_opts = { buffer = true, noremap = true }
     -- run the codelens under the cursor
-    vim.keymap.set("n", "<space>r",  vim.lsp.codelens.run, map_opts)
+    vim.keymap.set("n", "<space>r", vim.lsp.codelens.run, map_opts)
     -- remove the pipe operator
     vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", map_opts)
     -- add the pipe operator
