@@ -71,11 +71,16 @@ vim.wo.signcolumn = 'yes'
 
 --Set colorscheme
 vim.o.termguicolors = true
+
 -- vim.cmd [[colorscheme onedark]]
 local onedarkpro = require('onedarkpro')
 onedarkpro.setup({
   theme = 'onedark',
+  styles = {
+    comments = 'italic'
+  },
   options = {
+    italic = true,
     transparency = true
   }
 })
