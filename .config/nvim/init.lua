@@ -11,29 +11,38 @@ require('config.keybindings')
 -- plugin settings
 require('config.plugins')
 require('config.whichkey')
-require('config.bufferline')
 require('config.nvim-tree')
 require('config.toggleterm')
+require('config.vim-test')
 
 -- vim.cmd [[colorscheme onedark]]
-local onedarkpro = require('onedarkpro')
-onedarkpro.setup({
-  theme = 'onedark',
-  styles = {
-    comments = 'italic'
-  },
+-- local onedarkpro = require('onedarkpro')
+-- onedarkpro.setup({
+--   theme = 'onedark',
+--   styles = {
+--     comments = 'italic'
+--   },
+--   options = {
+--     italic = true,
+--     transparency = true
+--   }
+-- })
+-- onedarkpro.load()
+require('nightfox').setup({
   options = {
-    italic = true,
-    transparency = true
+    -- transparent = true,
+    styles = {
+      comments = "italic",
+    },
   }
 })
-onedarkpro.load()
+vim.cmd("colorscheme nightfox")
 
 --Set statusbar
 require('lualine').setup {
   options = {
-    -- icons_enabled = false,
-    theme = 'onedark',
+    icons_enabled = true,
+    -- theme = 'onedark',
   },
 }
 

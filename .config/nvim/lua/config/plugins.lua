@@ -56,32 +56,36 @@ return packer.startup(function(use)
 
   use 'folke/which-key.nvim'
 
-  use {
-    'akinsho/bufferline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-  }
+  use 'norcalli/nvim-colorizer.lua'
 
   use {
     'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
   }
 
-  use { 'christoomey/vim-tmux-navigator' }
+  use 'christoomey/vim-tmux-navigator'
+
+  use 'janko-m/vim-test'
 
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   use 'olimorris/onedarkpro.nvim' -- Theme
+  use "EdenEast/nightfox.nvim"
+
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
 
-  use { "akinsho/toggleterm.nvim" }
+  use "akinsho/toggleterm.nvim"
 
   -- Add indentation guides even on blank lines
   use 'lukas-reineke/indent-blankline.nvim'
 
   -- Add git related info in the signs columns and popups
-  use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+  use {
+    'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' }
+  }
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
   use {

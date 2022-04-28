@@ -113,6 +113,15 @@ local mappings = {
   },
 
   t = {
+    name = "Test",
+    T = { "<cmd>TestFile<cr>", "Test File" },
+    t = { "<cmd>TestNearest<cr>", "Test Nearest" },
+    a = { "<cmd>TestSuite<cr>", "Test Suite" },
+    l = { "<cmd>TestLast<cr>", "Test Last" },
+    v = { "<cmd>TestVisit<cr>", "Open last test file" },
+  },
+
+  T = {
     name = "Terminal",
     f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
