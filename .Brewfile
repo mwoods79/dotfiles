@@ -13,6 +13,7 @@ brew "ctags"
 brew "direnv"
 brew "ripgrep"
 brew "jq"
+brew "lazygit"
 
 tap "homebrew/cask-fonts"
 cask "font-fira-code-nerd-font"
