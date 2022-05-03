@@ -33,10 +33,7 @@ local mappings = {
   f = {
     name = "Find",
     f = { "<cmd>Telescope find_files<cr>", "Files" },
-    b = {
-      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-      "Buffers",
-    },
+    b = { "<cmd>Telescope buffers previewer=false<cr>", "Buffers" },
     s = { "<cmd>Telescope live_grep<cr>", "Grep" },
     c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
     h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
@@ -46,7 +43,6 @@ local mappings = {
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
-
 
   p = {
     name = "Packer",
@@ -67,54 +63,38 @@ local mappings = {
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
     s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
-    u = {
-      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
-      "Undo Stage Hunk",
-    },
+    u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", "Undo Stage Hunk" },
     o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
     b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
     c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
-    d = {
-      "<cmd>Gitsigns diffthis HEAD<cr>",
-      "Diff",
-    },
+    d = { "<cmd>Gitsigns diffthis HEAD<cr>", "Diff" },
   },
 
   l = {
     name = "LSP",
-    a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
-    d = {
-      "<cmd>Telescope lsp_document_diagnostics<cr>",
-      "Document Diagnostics",
-    },
-    w = {
-      "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-      "Workspace Diagnostics",
-    },
+    -- a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+    a = { "<cmd>Lspsaga code_action<cr>", "Code Action" },
+    e = { '<cmd>Lspsaga show_line_diagnostics<cr>', "Line Diagnostics" },
+    d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
+    w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
     f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
-    j = {
-      "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-      "Next Diagnostic",
-    },
-    k = {
-      "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
-      "Prev Diagnostic",
-    },
+    -- j = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },
+    -- k = { "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>", "Prev Diagnostic" },
+    j = { "<cmd>Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic" },
+    k = { "<cmd>Lspsaga diagnostic_jump_prev<cr>", "Prev Diagnostic" },
     l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
-    r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    -- r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+    r = { "<cmd><cmd>Lspsaga rename<cr>", "Rename" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
-    S = {
-      "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-      "Workspace Symbols",
-    },
+    S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
   },
 
   t = {
     name = "Test",
-    T = { "<cmd>TestFile<cr>", "Test File" },
+    f = { "<cmd>TestFile<cr>", "Test File" },
     t = { "<cmd>TestNearest<cr>", "Test Nearest" },
     a = { "<cmd>TestSuite<cr>", "Test Suite" },
     l = { "<cmd>TestLast<cr>", "Test Last" },
