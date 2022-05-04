@@ -53,6 +53,10 @@ require('gitsigns').setup {
     topdelete = { text = '‾' },
     changedelete = { text = '~' },
   },
+  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+  yadm = {
+    enable = true
+  },
 }
 
 -- Telescope

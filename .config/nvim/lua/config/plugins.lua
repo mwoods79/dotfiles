@@ -100,12 +100,10 @@ return packer.startup(function(use)
   -- Additional textobjects for treesitter
   use 'nvim-treesitter/nvim-treesitter-textobjects'
 
+  -- LSP Config
+  use 'williamboman/nvim-lsp-installer'
   use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use({
-    'jose-elias-alvarez/null-ls.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-  })
-  use { 'tami5/lspsaga.nvim', config = function() require('config.lspsaga') end }
+  use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
   -- Elixir specific
   use({
     'mhanberg/elixir.nvim',
@@ -115,20 +113,25 @@ return packer.startup(function(use)
     }
   })
 
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'saadparwaiz1/cmp_luasnip'
-  use({
-    'L3MON4D3/LuaSnip', -- Snippets plugin
-    requires = {
-      "rafamadriz/friendly-snippets" -- Community snippets
-    }
-  })
-
+  -- LSP UI
+  use { 'tami5/lspsaga.nvim', config = function() require('config.lspsaga') end }
   use {
     'folke/trouble.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
   }
+
+
+  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+  use 'hrsh7th/cmp-nvim-lsp'
+  use 'saadparwaiz1/cmp_luasnip'
+
+  -- Snippets
+  use({
+    'L3MON4D3/LuaSnip',
+    requires = {
+      "rafamadriz/friendly-snippets" -- Community snippets
+    }
+  })
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
