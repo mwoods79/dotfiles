@@ -1,6 +1,33 @@
 -- LSP settings
 local lspconfig = require 'lspconfig'
-local on_attach = function(_, bufnr)
+
+local LspFormattingGroup = vim.api.nvim_create_augroup("LspFormatting", {})
+local FormatOnSave = function(bufnr)
+  vim.api.nvim_clear_autocmds({ group = LspFormattingGroup, buffer = bufnr })
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = LspFormattingGroup,
+    buffer = bufnr,
+    -- on 0.8, you should use vim.lsp.buf.format instead
+    callback = vim.lsp.buf.formatting_sync,
+  })
+end
+
+-- initialize to false because format on save is manually added
+local toggle_format_state = false
+-- Toggle format on save for the current buffer
+local ToggleFormatOnSave = function(bufnr)
+  bufnr = vim.api.nvim_get_current_buf()
+
+  if toggle_format_state then
+    toggle_format_state = not toggle_format_state
+    FormatOnSave(bufnr)
+  else
+    toggle_format_state = not toggle_format_state
+    vim.api.nvim_clear_autocmds({ group = LspFormattingGroup, buffer = bufnr })
+  end
+end
+
+local on_attach = function(client, bufnr)
   local opts = { buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -16,9 +43,13 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-  vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting, {})
   -- disable virtual text
   vim.diagnostic.config({ virtual_text = false })
+
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting_sync, {})
+    vim.api.nvim_create_user_command("ToggleFormatOnSave", ToggleFormatOnSave, {})
+  end
 end
 
 -- nvim-cmp supports additional completion capabilities
@@ -26,7 +57,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'solargraph' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -119,16 +150,13 @@ if not null_ls_status_ok then
   return
 end
 
-local formatting = null_ls.builtins.formatting
+-- local formatting = null_ls.builtins.formatting
 local diagnostics = null_ls.builtins.diagnostics
 -- local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
   debug = false,
   sources = {
-    formatting.prettier,
-    formatting.stylua,
-    formatting.mix,
     diagnostics.credo,
   },
   -- on_attach = function(client, bufnr)
