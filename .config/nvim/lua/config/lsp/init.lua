@@ -13,7 +13,7 @@ local FormatOnSave = function(bufnr)
 end
 
 -- initialize to false because format on save is manually added
-local toggle_format_state = false
+local toggle_format_state = true
 -- Toggle format on save for the current buffer
 local ToggleFormatOnSave = function(bufnr)
   bufnr = vim.api.nvim_get_current_buf()
@@ -21,9 +21,11 @@ local ToggleFormatOnSave = function(bufnr)
   if toggle_format_state then
     toggle_format_state = not toggle_format_state
     FormatOnSave(bufnr)
+    print("FormatOnSave toggled on")
   else
     toggle_format_state = not toggle_format_state
     vim.api.nvim_clear_autocmds({ group = LspFormattingGroup, buffer = bufnr })
+    print("FormatOnSave toggled off")
   end
 end
 
