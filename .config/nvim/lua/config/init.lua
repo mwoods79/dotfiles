@@ -1,114 +1,82 @@
 -- vim settings
-require('config.options')
-require('config.keybindings')
+vim.cmd('filetype plugin indent on')
+vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.o.hidden = true
+vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+vim.o.pumheight = 10
+vim.o.fileencoding = 'utf-8'
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.conceallevel = 0
+vim.o.showtabline = 2
+vim.o.showmode = false
+vim.o.backup = false
+vim.o.writebackup = false
+vim.o.timeoutlen = 500
+-- vim.o.clipboard = "unnamedplus"
+vim.o.scrolloff = 3
+vim.o.sidescrolloff = 5
+vim.o.mouse = "a"
+vim.wo.wrap = false
+vim.wo.number = true
+vim.wo.signcolumn = "yes"
+vim.o.tabstop = 2
+vim.bo.tabstop = 2
+vim.o.softtabstop = 2
+vim.o.shiftwidth = 2
+vim.bo.shiftwidth = 2
+vim.o.autoindent = true
+vim.bo.autoindent = true
+vim.o.expandtab = true
+vim.bo.expandtab = true
+
+--Enable break indent
+vim.o.breakindent = true
+
+--Save undo history
+vim.opt.undofile = true
+
+--Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
+vim.o.smartcase = true
+
+--Decrease update time
+vim.o.updatetime = 250
+vim.wo.signcolumn = 'yes'
+
+--Set colorscheme
+vim.o.termguicolors = true
+
+-- Highlight on yank
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
+
+--Remap space as leader key
+local map = require("config.utils").map
+map({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- map('n', '<C-h>', '<C-w>h', {noremap = true, silent = false})
+-- map('n', '<C-l>', '<C-w>l', {noremap = true, silent = false})
+-- map('n', '<C-j>', '<C-w>j', {noremap = true, silent = false})
+-- map('n', '<C-k>', '<C-w>k', {noremap = true, silent = false})
+
+map('i', 'jk', '<ESC>', {noremap = true, silent = false})
+map('i', 'kj', '<ESC>', {noremap = true, silent = false})
+
+--Remap for dealing with word wrap
+map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- plugin settings
 require('config.plugins')
-require('config.whichkey')
-require('config.nvim-tree')
-require('config.toggleterm')
-require('config.vim-test')
-require('config.treesitter')
 require('config.lsp')
 
-require('nightfox').setup({
-  options = {
-    -- transparent = true,
-    styles = {
-      comments = "italic",
-    },
-  }
-})
 vim.cmd("colorscheme nightfox")
-
---Set statusbar
-require('lualine').setup {
-  options = {
-    icons_enabled = true,
-    -- theme = 'onedark',
-  },
-}
-
---Enable Comment.nvim
-require('Comment').setup()
-
---Map blankline
-vim.g.indent_blankline_char = '┊'
-vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
-vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
-vim.g.indent_blankline_show_trailing_blankline_indent = false
-
--- Gitsigns
-require('gitsigns').setup {
-  signs = {
-    add = { text = '+' },
-    change = { text = '~' },
-    delete = { text = '_' },
-    topdelete = { text = '‾' },
-    changedelete = { text = '~' },
-  },
-  current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-  yadm = {
-    enable = true
-  },
-}
-
--- Telescope
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
-      },
-    },
-  },
-}
-
--- Enable telescope fzf native
-require('telescope').load_extension('fzf')
-
--- luasnip setup
-local luasnip = require 'luasnip'
-require("luasnip.loaders.from_vscode").lazy_load()
-
--- nvim-cmp setup
-local cmp = require 'cmp'
-cmp.setup {
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  }),
-  sources = {
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  },
-}

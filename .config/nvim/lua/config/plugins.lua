@@ -33,7 +33,7 @@ return packer.startup(function(use)
   -- Have Packer manage itself
   use 'wbthomason/packer.nvim'
 
-  -- Cache me (lua) outside how bout dat
+  -- Cache me outside how bout dat
   use 'lewis6991/impatient.nvim'
 
   --[[
@@ -53,57 +53,138 @@ return packer.startup(function(use)
 
   use 'christoomey/vim-tmux-navigator'
 
-  use 'janko-m/vim-test'
+  use { 'janko-m/vim-test',
+    config = function()
+      require('config.vim-test')
+    end
+  }
 
   --[[
   Lua Plugins Begin
   ]]
 
   -- colorscheme
-  use 'EdenEast/nightfox.nvim'
+  use { 'EdenEast/nightfox.nvim',
+    config = function()
+      require('nightfox').setup({
+        options = {
+          -- transparent = true,
+          styles = {
+            comments = "italic",
+          },
+        }
+      })
+    end
+  }
 
-  use 'numToStr/Comment.nvim' -- 'gc' to comment visual regions/lines
+  use { 'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  }
   use 'ludovicchabant/vim-gutentags' -- Automatic tags management
 
-  use 'folke/which-key.nvim'
+  use { 'folke/which-key.nvim',
+    config = function()
+      require('config.whichkey')
+    end
+  }
 
   use 'norcalli/nvim-colorizer.lua'
 
-  use {
-    'kyazdani42/nvim-tree.lua',
+  use { 'kyazdani42/nvim-tree.lua',
     requires = 'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('nvim-tree').setup({})
+    end
   }
 
   -- UI to select things (files, grep results, open buffers...)
-  use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+  use { 'nvim-telescope/telescope.nvim',
+    requires = { 'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim',
+        run = 'make'
+      }
+    },
+    config = function()
+      require('telescope').setup {
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-u>'] = false,
+              ['<C-d>'] = false,
+            },
+          },
+        },
+      }
 
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
+      -- Enable telescope fzf native
+      require('telescope').load_extension('fzf')
+    end
+  }
 
-  use 'akinsho/toggleterm.nvim'
+  -- Fancy statusline
+  use { 'nvim-lualine/lualine.nvim',
+    config = function()
+      require('lualine').setup {
+        options = {
+          icons_enabled = true,
+          -- theme = 'onedark',
+        },
+      }
+    end
+  }
+
+  use { 'akinsho/toggleterm.nvim',
+    config = function()
+      require('config.toggleterm')
+    end
+  }
 
   -- Add indentation guides even on blank lines
-  use 'lukas-reineke/indent-blankline.nvim'
+  use { 'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      vim.g.indent_blankline_char = '┊'
+      vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
+      vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
+      vim.g.indent_blankline_show_trailing_blankline_indent = false
+    end
+  }
 
   -- Add git related info in the signs columns and popups
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' }
+  use { 'lewis6991/gitsigns.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('gitsigns').setup {
+        current_line_blame = false,
+        yadm = {
+          enable = true
+        },
+      }
+    end
   }
 
   -- Highlight, edit, and navigate code using a fast incremental parsing library
-  use {
-    'nvim-treesitter/nvim-treesitter',
+  use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
+    requires = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    config = function()
+      require('config.treesitter')
+    end
   }
 
-  -- Additional textobjects for treesitter
-  use 'nvim-treesitter/nvim-treesitter-textobjects'
-
   -- LSP Config
-  use 'williamboman/nvim-lsp-installer'
-  use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-  use({ 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } })
+  use { 'neovim/nvim-lspconfig',
+    requires = {
+      'williamboman/nvim-lsp-installer',
+      -- TODO: 'folke/lua-dev.nvim',
+    },
+  }
+
+  use { 'jose-elias-alvarez/null-ls.nvim',
+    requires = { 'nvim-lua/plenary.nvim' },
+  }
+
   -- Elixir specific
   use({
     'mhanberg/elixir.nvim',
@@ -114,24 +195,44 @@ return packer.startup(function(use)
   })
 
   -- LSP UI
-  use { 'tami5/lspsaga.nvim', config = function() require('config.lspsaga') end }
-  use {
-    'folke/trouble.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
+  use { 'tami5/lspsaga.nvim',
+    config = function()
+      require('config.lspsaga')
+    end
   }
 
+  use { "folke/trouble.nvim",
+    cmd = { "TroubleToggle", "Trouble" },
+    config = function()
+      require("trouble").setup { auto_open = false }
+    end,
+  }
 
-  use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'saadparwaiz1/cmp_luasnip'
+  use { "folke/todo-comments.nvim",
+    cmd = { "TodoTrouble", "TodoTelescope" },
+    config = function()
+      require("todo-comments").setup {}
+    end,
+  }
+
+  use { "hrsh7th/nvim-cmp", -- Autocompletion plugin
+    requires = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      'saadparwaiz1/cmp_luasnip',
+      "hrsh7th/cmp-nvim-lua",
+    },
+    config = function()
+      require("config.cmp")
+    end
+  }
 
   -- Snippets
-  use({
-    'L3MON4D3/LuaSnip',
+  use { 'L3MON4D3/LuaSnip',
     requires = {
       "rafamadriz/friendly-snippets" -- Community snippets
     }
-  })
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
