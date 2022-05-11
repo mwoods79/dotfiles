@@ -90,6 +90,7 @@ local mappings = {
     r = { "<cmd>Lspsaga rename<cr>", "Rename" },
     s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
     S = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Workspace Symbols" },
+    F = { "<cmd>ToggleFormatOnSave<cr>", "Toggle Format on Save" },
   },
 
   t = {
