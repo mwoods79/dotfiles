@@ -116,7 +116,6 @@ return packer.startup(function(use)
         defaults = {
           mappings = {
             i = {
-              ["<CR>"] = require('telescope.actions').select_tab,
               ["<esc>"] = require('telescope.actions').close,
             }
           },
