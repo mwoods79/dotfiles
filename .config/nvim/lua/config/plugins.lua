@@ -56,8 +56,9 @@ return packer.startup(function(use)
   use 'christoomey/vim-tmux-navigator'
 
   use { 'janko-m/vim-test',
+    requires = { 'jgdavey/tslime.vim' },
     config = function()
-      require('config.vim-test')
+      vim.g["test#strategy"] = "tslime"
     end
   }
 
