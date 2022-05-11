@@ -104,24 +104,36 @@ return packer.startup(function(use)
   -- UI to select things (files, grep results, open buffers...)
   use { 'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope-ui-select.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim',
         run = 'make'
       }
     },
     config = function()
-      require('telescope').setup {
+      local telescope = require('telescope')
+      telescope.setup {
         defaults = {
           mappings = {
             i = {
-              ['<C-u>'] = false,
-              ['<C-d>'] = false,
-            },
+              ["<CR>"] = require('telescope.actions').select_tab,
+              ["<esc>"] = require('telescope.actions').close,
+            }
           },
         },
+        extensions = {
+          fzf = {
+            override_generic_sorter = false, -- Causes crashes
+          },
+          ["ui-select"] = {
+            require("telescope.themes").get_dropdown {}
+          }
+        }
       }
 
       -- Enable telescope fzf native
-      require('telescope').load_extension('fzf')
+      telescope.load_extension('fzf')
+      -- Replace vim ui select with telescope
+      telescope.load_extension('ui-select')
     end
   }
 
