@@ -1,3 +1,8 @@
+local exists, notify = pcall(require, "notify")
+if exists then
+  vim.notify = notify
+end
+
 -- vim settings
 vim.cmd('filetype plugin indent on')
 vim.o.shortmess = vim.o.shortmess .. 'c'

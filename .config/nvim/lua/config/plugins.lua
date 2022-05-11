@@ -36,6 +36,8 @@ return packer.startup(function(use)
   -- Cache me outside how bout dat
   use 'lewis6991/impatient.nvim'
 
+  use 'rcarriga/nvim-notify'
+
   --[[
   Vimscript plugins
   Hopefully one day there will be lua alternatives to thise plugins, sorry tpope :(
@@ -177,7 +179,6 @@ return packer.startup(function(use)
   use { 'neovim/nvim-lspconfig',
     requires = {
       'williamboman/nvim-lsp-installer',
-      -- TODO: 'folke/lua-dev.nvim',
     },
   }
 

@@ -21,11 +21,11 @@ local ToggleFormatOnSave = function(bufnr)
   if toggle_format_state then
     toggle_format_state = not toggle_format_state
     FormatOnSave(bufnr)
-    print("FormatOnSave toggled on")
+    vim.notify("FormatOnSave toggled on")
   else
     toggle_format_state = not toggle_format_state
     vim.api.nvim_clear_autocmds({ group = LspFormattingGroup, buffer = bufnr })
-    print("FormatOnSave toggled off")
+    vim.notify("FormatOnSave toggled off")
   end
 end
 
