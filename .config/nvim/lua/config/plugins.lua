@@ -149,6 +149,14 @@ return packer.startup(function(use)
     end
   }
 
+  -- Fancy tabs at top
+  use { "nanozuki/tabby.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("tabby").setup({})
+    end
+  }
+
   use { 'akinsho/toggleterm.nvim',
     config = function()
       require('config.toggleterm')
