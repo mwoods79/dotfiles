@@ -147,6 +147,16 @@ elixir.setup({
   end
 })
 
+local ok, lsp_signature = pcall(require, "lsp_signature")
+if ok then
+  lsp_signature.setup {
+    bind = true,
+    handler_opts = {
+      border = "rounded",
+    },
+  }
+end
+
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
 if not null_ls_status_ok then
   return

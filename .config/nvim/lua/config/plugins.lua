@@ -191,6 +191,7 @@ return packer.startup(function(use)
   use { 'neovim/nvim-lspconfig',
     requires = {
       'williamboman/nvim-lsp-installer',
+      "ray-x/lsp_signature.nvim",
     },
   }
 
