@@ -134,9 +134,13 @@ return packer.startup(function(use)
     config = function()
       require('lualine').setup {
         options = {
-          icons_enabled = true,
-          -- theme = 'onedark',
         },
+        extensions = {
+          'nvim-tree',
+          'quickfix',
+          'fugitive',
+          'toggleterm',
+        }
       }
     end
   }
