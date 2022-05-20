@@ -43,4 +43,6 @@ cmp.setup {
     { name = 'luasnip' },
     { name = "buffer", keyword_length = 5 },
   },
+  completion = { completeopt = "menu,menuone,noinsert" },
+  experimental = { ghost_text = true },
 }
