@@ -69,6 +69,8 @@ return packer.startup(function(use)
           },
         }
       })
+
+      vim.cmd("colorscheme nightfox")
     end
   }
 
@@ -133,8 +135,6 @@ return packer.startup(function(use)
   use { 'nvim-lualine/lualine.nvim',
     config = function()
       require('lualine').setup {
-        options = {
-        },
         extensions = {
           'nvim-tree',
           'quickfix',
@@ -148,6 +148,7 @@ return packer.startup(function(use)
   -- Fancy tabs at top
   use { "nanozuki/tabby.nvim",
     requires = "kyazdani42/nvim-web-devicons",
+    after = 'nightfox.nvim',
     config = function()
       require("tabby").setup({})
     end
@@ -250,6 +251,14 @@ return packer.startup(function(use)
     requires = {
       "rafamadriz/friendly-snippets" -- Community snippets
     }
+  }
+
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v1',
+    config = function()
+      require('hop').setup()
+    end
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

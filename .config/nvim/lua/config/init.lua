@@ -52,6 +52,11 @@ vim.wo.signcolumn = 'yes'
 --Set colorscheme
 vim.o.termguicolors = true
 
+--Nice numbers
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.cursorline = true
+
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -82,5 +87,3 @@ map('n',  'gY', 'gg"+yG', {noremap = true, silent = true})
 -- plugin settings
 require('config.plugins')
 require('config.lsp')
-
-vim.cmd("colorscheme nightfox")

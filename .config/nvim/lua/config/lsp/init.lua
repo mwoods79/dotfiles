@@ -45,8 +45,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
-  -- disable virtual text
-  vim.diagnostic.config({ virtual_text = false })
 
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting_sync, {})
