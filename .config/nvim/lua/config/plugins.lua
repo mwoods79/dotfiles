@@ -253,12 +253,30 @@ return packer.startup(function(use)
     }
   }
 
-  use {
-    'phaazon/hop.nvim',
+  use { 'phaazon/hop.nvim',
     branch = 'v1',
     config = function()
       require('hop').setup()
     end
+  }
+
+  use { 'TimUntersberger/neogit',
+    cmd = { "Neogit" },
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim'
+    }
+  }
+
+  use { 'sindrets/diffview.nvim',
+    cmd = {
+      "DiffviewOpen",
+      "DiffviewToggleFiles",
+      "DiffviewFocusFiles",
+      "DiffviewRefresh",
+      "DiffviewFileHistory"
+    },
+    requires = 'nvim-lua/plenary.nvim'
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
