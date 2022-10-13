@@ -1,4 +1,6 @@
 -- LSP settings
+require("mason").setup()
+require("mason-lspconfig").setup()
 local lspconfig = require 'lspconfig'
 
 local LspFormattingGroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -57,7 +59,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'solargraph' }
+local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'solargraph', 'gopls', 'vls' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -105,7 +107,7 @@ elixir.setup({
     dialyzerEnabled = true,
     fetchDeps = false,
     enableTestLenses = false,
-    suggestSpecs = false,
+    suggestSpecs = true,
   }),
 
 

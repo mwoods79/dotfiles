@@ -193,12 +193,21 @@ return packer.startup(function(use)
   }
 
   -- LSP Config
-  use { 'neovim/nvim-lspconfig',
-    requires = {
-      'williamboman/nvim-lsp-installer',
-      "ray-x/lsp_signature.nvim",
+  use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    { "neovim/nvim-lspconfig",
+      requires = {
+        "ray-x/lsp_signature.nvim",
+      }
     },
   }
+  -- use { 'neovim/nvim-lspconfig',
+  --   requires = {
+  --     'williamboman/nvim-lsp-installer',
+  --     "ray-x/lsp_signature.nvim",
+  --   },
+  -- }
 
   use { 'jose-elias-alvarez/null-ls.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
@@ -221,14 +230,12 @@ return packer.startup(function(use)
   }
 
   use { "folke/trouble.nvim",
-    cmd = { "TroubleToggle", "Trouble" },
     config = function()
       require("trouble").setup { auto_open = false }
     end,
   }
 
   use { "folke/todo-comments.nvim",
-    cmd = { "TodoTrouble", "TodoTelescope" },
     config = function()
       require("todo-comments").setup {}
     end,
@@ -261,7 +268,6 @@ return packer.startup(function(use)
   }
 
   use { 'TimUntersberger/neogit',
-    cmd = { "Neogit" },
     requires = {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim'
@@ -269,13 +275,6 @@ return packer.startup(function(use)
   }
 
   use { 'sindrets/diffview.nvim',
-    cmd = {
-      "DiffviewOpen",
-      "DiffviewToggleFiles",
-      "DiffviewFocusFiles",
-      "DiffviewRefresh",
-      "DiffviewFileHistory"
-    },
     requires = 'nvim-lua/plenary.nvim'
   }
 

@@ -84,6 +84,11 @@ map('v',  'gy', '"+y', {noremap = true, silent = true})
 -- copy whole file to system clipboard
 map('n',  'gY', 'gg"+yG', {noremap = true, silent = true})
 
+--Support for Vlang
+vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
+vim.cmd([[au BufNewFile,BufRead *.vv set filetype=vlang]])
+vim.cmd([[au BufNewFile,BufRead *.vsh set filetype=vlang]])
+
 -- plugin settings
 require('config.plugins')
 require('config.lsp')
