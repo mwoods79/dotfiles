@@ -3,31 +3,35 @@ require("mason").setup()
 require("mason-lspconfig").setup()
 local lspconfig = require 'lspconfig'
 
-local LspFormattingGroup = vim.api.nvim_create_augroup("LspFormatting", {})
-local FormatOnSave = function(bufnr)
-  vim.api.nvim_clear_autocmds({ group = LspFormattingGroup, buffer = bufnr })
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = LspFormattingGroup,
-    buffer = bufnr,
-    -- on 0.8, you should use vim.lsp.buf.format instead
-    callback = vim.lsp.buf.formatting_sync,
-  })
+local LSPFormatting = "LSPFormatting"
+
+local _disable_format_on_save = function(bufnr)
+  vim.api.nvim_clear_autocmds { group = LSPFormatting, buffer = bufnr }
+  vim.notify("DISABLE: Format on Save")
 end
 
--- initialize to false because format on save is manually added
-local toggle_format_state = true
--- Toggle format on save for the current buffer
-local ToggleFormatOnSave = function(bufnr)
-  bufnr = vim.api.nvim_get_current_buf()
+local _enable_format_on_save = function(bufnr)
+  vim.api.nvim_create_augroup(LSPFormatting, {})
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    group = LSPFormatting,
+    callback = function()
+      vim.lsp.buf.format({ buffer = bufnr })
+    end,
+    buffer = bufnr,
+  })
+  vim.notify("ENABLE: Format on Save")
+end
 
-  if toggle_format_state then
-    toggle_format_state = not toggle_format_state
-    FormatOnSave(bufnr)
-    vim.notify("FormatOnSave toggled on")
+local _toggle_format_on_save = function(bufnr)
+  local exists, autocmds = pcall(vim.api.nvim_get_autocmds, {
+    group = LSPFormatting,
+    event = "BufWritePre",
+    buffer = bufnr,
+  })
+  if not exists or #autocmds == 0 then
+    _enable_format_on_save(bufnr)
   else
-    toggle_format_state = not toggle_format_state
-    vim.api.nvim_clear_autocmds({ group = LspFormattingGroup, buffer = bufnr })
-    vim.notify("FormatOnSave toggled off")
+    _disable_format_on_save(bufnr)
   end
 end
 
@@ -49,8 +53,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
 
   if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_create_user_command("Format", vim.lsp.buf.formatting_sync, {})
-    vim.api.nvim_create_user_command("ToggleFormatOnSave", ToggleFormatOnSave, {})
+    vim.api.nvim_create_user_command("Format", function()
+      vim.lsp.buf.format({ buffer = bufnr })
+    end, {})
+    vim.api.nvim_create_user_command("ToggleFormatOnSave", function()
+      _toggle_format_on_save(bufnr)
+    end, {})
   end
 end
 
@@ -178,7 +186,7 @@ null_ls.setup({
   --       group = augroup,
   --       buffer = bufnr,
   --       -- on 0.8, you should use vim.lsp.buf.format instead
-  --       callback = vim.lsp.buf.formatting_sync,
+  --       callback = vim.lsp.buf.format,
   --     })
   --   end
   -- end,

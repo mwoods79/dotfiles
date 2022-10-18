@@ -29,7 +29,7 @@ local mappings = {
   E = { ":e ~/.config/nvim/init.lua<cr>", "Edit config" },
   e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   h = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  s = { "<cmd>HopChar2<cr>", "Hop"},
+  s = { "<cmd>HopChar2<cr>", "Hop" },
 
   f = {
     name = "Find",
@@ -78,7 +78,7 @@ local mappings = {
     e = { '<cmd>Lspsaga show_line_diagnostics<cr>', "Line Diagnostics" },
     d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Document Diagnostics" },
     w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+    f = { "<cmd>lua vim.lsp.buf.format()<cr>", "Format" },
     i = { "<cmd>LspInfo<cr>", "Info" },
     I = { "<cmd>Mason<cr>", "Install/Update LSP Servers" },
     -- j = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "Next Diagnostic" },
