@@ -19,11 +19,5 @@ font:
   # Font size
   size: 16
 
-  # Better font rendering for mac
-  use_thin_strokes: true
-
-key_bindings:
-- { key: Return, mods: Command, action: ToggleSimpleFullScreen }
-
 import:
  - ~/.config/alacritty/skins/skin.yml
