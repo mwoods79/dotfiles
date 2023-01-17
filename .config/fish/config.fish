@@ -71,3 +71,7 @@ source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 if test -d ~/.cargo/bin
 	fish_add_path ~/.cargo/bin
 end
+
+direnv hook fish | source
+
+source /Users/micah/.docker/init-fish.sh || true # Added by Docker Desktop

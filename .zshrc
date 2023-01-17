@@ -40,3 +40,5 @@ eval "$(starship init zsh)"
 
 # load asdf completions
 source /usr/local/opt/asdf/libexec/asdf.sh
+
+source /Users/micah/.docker/init-zsh.sh || true # Added by Docker Desktop
