@@ -1,13 +1,13 @@
 -- LSP settings
 require("mason").setup()
 require("mason-lspconfig").setup()
-local lspconfig = require 'lspconfig'
+local lspconfig = require("lspconfig")
 
 local LSPFormatting = "LSPFormatting"
 
 local _disable_format_on_save = function(bufnr)
-  vim.api.nvim_clear_autocmds { group = LSPFormatting, buffer = bufnr }
-  vim.notify("DISABLE: Format on Save")
+  vim.api.nvim_clear_autocmds({ group = LSPFormatting, buffer = bufnr })
+  vim.notify("Format on Save: OFF")
 end
 
 local _enable_format_on_save = function(bufnr)
@@ -19,7 +19,7 @@ local _enable_format_on_save = function(bufnr)
     end,
     buffer = bufnr,
   })
-  vim.notify("ENABLE: Format on Save")
+  vim.notify("Format on Save: ON")
 end
 
 local _toggle_format_on_save = function(bufnr)
@@ -37,20 +37,20 @@ end
 
 local on_attach = function(client, bufnr)
   local opts = { buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-  vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
-  vim.keymap.set('n', '<leader>wl', function()
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+  vim.keymap.set("n", "<leader>wl", function()
     vim.inspect(vim.lsp.buf.list_workspace_folders())
   end, opts)
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
-  vim.keymap.set('n', '<leader>so', require('telescope.builtin').lsp_document_symbols, opts)
+  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>so", require("telescope.builtin").lsp_document_symbols, opts)
 
   if client.supports_method("textDocument/formatting") then
     vim.api.nvim_create_user_command("Format", function()
@@ -60,45 +60,46 @@ local on_attach = function(client, bufnr)
       _toggle_format_on_save(bufnr)
     end, {})
   end
+  _enable_format_on_save(bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'solargraph', 'gopls', 'vls' }
+local servers = { "clangd", "rust_analyzer", "pyright", "tsserver", "solargraph", "gopls", "vls" }
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  lspconfig[lsp].setup({
     on_attach = on_attach,
     capabilities = capabilities,
-  }
+  })
 end
 
 -- Example custom server
 -- Make runtime files discoverable to the server
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.sumneko_lua.setup {
+lspconfig.sumneko_lua.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
     Lua = {
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
+        version = "LuaJIT",
         -- Setup your lua path
         path = runtime_path,
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
+        globals = { "vim" },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file('', true),
+        library = vim.api.nvim_get_runtime_file("", true),
       },
       -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
@@ -106,7 +107,7 @@ lspconfig.sumneko_lua.setup {
       },
     },
   },
-}
+})
 
 local elixir = require("elixir")
 elixir.setup({
@@ -117,7 +118,6 @@ elixir.setup({
     enableTestLenses = false,
     suggestSpecs = true,
   }),
-
 
   capabilities = capabilities,
   on_attach = function(client, bufnr)
@@ -152,17 +152,17 @@ elixir.setup({
 
     -- update capabilities for nvim-cmp: https://github.com/hrsh7th/nvim-cmp
     require("cmp_nvim_lsp").default_capabilities(capabilities)
-  end
+  end,
 })
 
 local ok, lsp_signature = pcall(require, "lsp_signature")
 if ok then
-  lsp_signature.setup {
+  lsp_signature.setup({
     bind = true,
     handler_opts = {
       border = "rounded",
     },
-  }
+  })
 end
 
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")

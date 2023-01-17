@@ -78,11 +78,11 @@ map('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- copy to end of line
-map('n',  'Y', 'y$', {noremap = true, silent = true})
+map('n', 'Y', 'y$', { noremap = true, silent = true })
 -- copy to system clipboard
-map('v',  'gy', '"+y', {noremap = true, silent = true})
+map('v', 'gy', '"+y', { noremap = true, silent = true })
 -- copy whole file to system clipboard
-map('n',  'gY', 'gg"+yG', {noremap = true, silent = true})
+map('n', 'gY', 'gg"+yG', { noremap = true, silent = true })
 
 --Support for Vlang
 vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
