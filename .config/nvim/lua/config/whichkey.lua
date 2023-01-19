@@ -30,6 +30,7 @@ local mappings = {
   e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   h = { "<cmd>nohlsearch<CR>", "No Highlight" },
   s = { "<cmd>HopChar2<cr>", "Hop" },
+  L = { "<cmd>Lazy<cr>", "Lazy" },
 
   f = {
     name = "Find",
@@ -43,15 +44,6 @@ local mappings = {
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
-  },
-
-  p = {
-    name = "Packer",
-    c = { "<cmd>PackerCompile<cr>", "Compile" },
-    i = { "<cmd>PackerInstall<cr>", "Install" },
-    s = { "<cmd>PackerSync<cr>", "Sync" },
-    S = { "<cmd>PackerStatus<cr>", "Status" },
-    u = { "<cmd>PackerUpdate<cr>", "Update" },
   },
 
   g = {
