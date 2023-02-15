@@ -1,14 +1,14 @@
 --Remap space as leader key
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- vim settings
-vim.cmd('filetype plugin indent on')
-vim.o.shortmess = vim.o.shortmess .. 'c'
+vim.cmd("filetype plugin indent on")
+vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.hidden = true
-vim.o.whichwrap = 'b,s,<,>,[,],h,l'
+vim.o.whichwrap = "b,s,<,>,[,],h,l"
 vim.o.pumheight = 10
-vim.o.fileencoding = 'utf-8'
+vim.o.fileencoding = "utf-8"
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.conceallevel = 0
@@ -46,7 +46,7 @@ vim.o.smartcase = true
 
 --Decrease update time
 vim.o.updatetime = 250
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 
 --Set colorscheme
 vim.o.termguicolors = true

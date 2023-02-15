@@ -105,5 +105,5 @@ return {
       --     t = { ":Twilight<cr>", "Toggle Twilight" }
       --   },
     }, opts)
-  end
+  end,
 }
