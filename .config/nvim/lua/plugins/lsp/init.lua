@@ -18,54 +18,60 @@ return {
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
       },
-      servers = {
-        rust_analyzer = {},
-        tsserver = {},
-        solargraph = {},
-        gopls = {},
-        vls = {},
-        jsonls = {},
-        sumneko_lua = {
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-            },
-          },
-          elixirLS = {
-            dialyzerEnabled = true,
-            fetchDeps = false,
-            enableTestLenses = false,
-            suggestSpecs = true,
-          },
-        },
+
+      ensure_installed = {
+        "denols",
+        "rust_analyzer",
+        "tsserver",
+        "solargraph",
+        "gopls",
+        "vls",
+        "jsonls",
+        "lua_ls",
+        "elixirls",
       },
     },
     config = function(_, opts)
-      local servers = opts.servers
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-      require("mason-lspconfig").setup({ ensure_installed = vim.tbl_keys(servers) })
-      require("mason-lspconfig").setup_handlers {
+      require("mason-lspconfig").setup({ ensure_installed = opts.ensure_installed })
+      require("mason-lspconfig").setup_handlers({
         function(server_name)
-          require('lspconfig')[server_name].setup {
+          require("lspconfig")[server_name].setup({
             capabilities = capabilities,
             on_attach = function(client, buffer)
               require("plugins.lsp.format").on_attach(client, buffer)
               require("plugins.lsp.keymaps").on_attach(client, buffer)
             end,
-            settings = servers[server_name],
-          }
+          })
         end,
-      }
+        ["tsserver"] = function()
+          require("lspconfig").tsserver.setup({
+            capabilities = capabilities,
+            on_attach = function(client, buffer)
+              require("plugins.lsp.format").on_attach(client, buffer)
+              require("plugins.lsp.keymaps").on_attach(client, buffer)
+            end,
+            root_dir = require("lspconfig").util.root_pattern("package.json"),
+            single_file_support = false,
+          })
+        end,
+        ["denols"] = function()
+          require("lspconfig").denols.setup({
+            capabilities = capabilities,
+            on_attach = function(client, buffer)
+              require("plugins.lsp.format").on_attach(client, buffer)
+              require("plugins.lsp.keymaps").on_attach(client, buffer)
+            end,
+            root_dir = require("lspconfig").util.root_pattern("deno.json", "deno.jsonc"),
+          })
+        end,
+      })
     end,
   },
 
-  { "jose-elias-alvarez/null-ls.nvim",
+  {
+    "jose-elias-alvarez/null-ls.nvim",
     event = "BufReadPre",
     dependencies = { "mason.nvim" },
     opts = function()
@@ -74,13 +80,15 @@ return {
         sources = {
           nls.builtins.diagnostics.credo,
           nls.builtins.formatting.prettier,
-          nls.builtins.formatting.rubocop
+          nls.builtins.formatting.rubocop,
+          nls.builtins.formatting.stylua,
         },
       }
     end,
   },
 
-  { "williamboman/mason.nvim",
+  {
+    "williamboman/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>lI", "<cmd>Mason<cr>", desc = "Mason" } },
     config = function(_, opts)
