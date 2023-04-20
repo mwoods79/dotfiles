@@ -22,7 +22,6 @@ vim.o.scrolloff = 3
 vim.o.sidescrolloff = 5
 vim.o.mouse = "a"
 vim.wo.wrap = false
-vim.wo.number = true
 vim.wo.signcolumn = "yes"
 vim.o.tabstop = 2
 vim.bo.tabstop = 2
@@ -53,5 +52,4 @@ vim.o.termguicolors = true
 
 --Nice numbers
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.cursorline = true
