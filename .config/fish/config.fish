@@ -67,6 +67,11 @@ source (brew --prefix)/opt/asdf/libexec/asdf.fish
 # opam configuration
 source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
+# nim setup
+if test -d ~/.nimble/bin
+	fish_add_path ~/.nimble/bin
+end
+
 # rust setup
 if test -d ~/.cargo/bin
 	fish_add_path ~/.cargo/bin

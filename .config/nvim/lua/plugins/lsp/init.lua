@@ -67,6 +67,14 @@ return {
           })
         end,
       })
+
+      require("lspconfig").nim_langserver.setup({
+        capabilities = capabilities,
+        on_attach = function(client, buffer)
+          require("plugins.lsp.format").on_attach(client, buffer)
+          require("plugins.lsp.keymaps").on_attach(client, buffer)
+        end,
+      })
     end,
   },
 
@@ -82,6 +90,7 @@ return {
           nls.builtins.formatting.prettier,
           nls.builtins.formatting.rubocop,
           nls.builtins.formatting.stylua,
+          nls.builtins.formatting.nimpretty,
         },
       }
     end,
