@@ -5,6 +5,8 @@ window:
     y: 10
   # Remove buttons
   decorations: buttonless
+  # On Mac OS make option behave like alt
+  option_as_alt: Both
 
 cursor:
   # Block Underline or Beam
