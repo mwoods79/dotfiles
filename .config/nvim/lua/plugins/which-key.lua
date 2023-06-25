@@ -99,6 +99,12 @@ return {
         v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
       },
 
+      p = {
+        name = "ChatGPT",
+        c = { "<cmd>ChatGPT<cr>", "Conversation Prompt" },
+        e = { require("chatgpt").edit_with_instructions, "Edit with instructions" },
+      },
+
       --   z = {
       --     name = "Focus",
       --     z = { ":ZenMode<cr>", "Toggle Zen Mode" },
