@@ -3,19 +3,13 @@ return {
 
   -- colorscheme
   {
-    "EdenEast/nightfox.nvim",
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
     lazy = false,
     config = function()
-      require("nightfox").setup({
-        options = {
-          -- transparent = true,
-          styles = {
-            comments = "italic",
-          },
-        },
-      })
-
-      vim.cmd("colorscheme nightfox")
+      -- vim.cmd("colorscheme catppuccin")
+      vim.cmd.colorscheme("catppuccin")
     end,
   },
 
@@ -32,22 +26,28 @@ return {
     "nvim-lualine/lualine.nvim",
     config = function()
       require("lualine").setup({
+        options = {
+          theme = "catppuccin",
+          component_separators = "|",
+          section_separators = { left = "", right = "" },
+          globalstatus = true,
+        },
+        tabline = {
+          lualine_a = { "buffers" },
+          lualine_b = { "branch" },
+          lualine_c = { "filename" },
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = { { "tabs", mode = 2 } },
+        },
         extensions = {
           "nvim-tree",
           "quickfix",
           "fugitive",
           "toggleterm",
+          "trouble",
         },
       })
-    end,
-  },
-
-  -- Fancy tabs at top
-  {
-    "nanozuki/tabby.nvim",
-    dependencies = { "kyazdani42/nvim-web-devicons", "EdenEast/nightfox.nvim" },
-    config = function()
-      require("tabby").setup({})
     end,
   },
 
