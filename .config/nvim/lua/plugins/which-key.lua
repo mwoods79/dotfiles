@@ -17,7 +17,6 @@ return {
       E = { ":e ~/.config/nvim/init.lua<cr>", "Edit config" },
       e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
       h = { "<cmd>nohlsearch<CR>", "No Highlight" },
-      s = { "<cmd>HopChar2<cr>", "Hop" },
       L = { "<cmd>Lazy<cr>", "Lazy" },
 
       f = {
