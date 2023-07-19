@@ -18,6 +18,7 @@ return {
       e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
       h = { "<cmd>nohlsearch<CR>", "No Highlight" },
       L = { "<cmd>Lazy<cr>", "Lazy" },
+      ["<leader>"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
 
       f = {
         name = "Find",

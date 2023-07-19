@@ -4,7 +4,9 @@ return {
 
   {
     "lewis6991/gitsigns.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim"
+    },
     event = "BufReadPre",
     opts = {
       current_line_blame = false,
@@ -15,12 +17,7 @@ return {
   },
 
   {
-    "TimUntersberger/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-    },
+    "sindrets/diffview.nvim",
+    dependencies = "nvim-lua/plenary.nvim"
   },
-
-  { "sindrets/diffview.nvim", dependencies = "nvim-lua/plenary.nvim" },
 }
