@@ -1,14 +1,8 @@
--- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = "*",
-})
+-- Autocmds are automatically loaded on the VeryLazy event
+-- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
+-- Add any additional autocmds here
 
---Support for Vlang
+-- Support for Vlang
 vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
 vim.cmd([[au BufNewFile,BufRead *.vv set filetype=vlang]])
 vim.cmd([[au BufNewFile,BufRead *.vsh set filetype=vlang]])
